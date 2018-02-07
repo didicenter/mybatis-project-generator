@@ -110,7 +110,7 @@
         <#list propertyList as property>
             <if test="record.${property.propertyName} != null">
                 <#if property.columnType =='json'>
-                ${property.columnName}=${r'#{'}record.${property.propertyName}${r', typeHandler=org.mybatis.plugin.JSONBinaryTypeHandler}'},
+                ${property.columnName}=${r'#{'}record.${property.propertyName}${r', typeHandler=org.mybatis.plugin.JSONTypeHandler}'},
                 <#elseif property.columnType =='jsonb'>
                 ${property.columnName}=${r'#{'}record.${property.propertyName}${r', typeHandler=org.mybatis.plugin.JSONBinaryTypeHandler}'},
                 <#else >
