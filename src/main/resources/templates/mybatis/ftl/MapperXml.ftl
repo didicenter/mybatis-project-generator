@@ -74,13 +74,17 @@
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
         <#list propertyList as property>
-            <#if property.columnType =='json'>
-            ${property.columnName}=${r'#{'}record.${property.propertyName}${r', typeHandler=org.mybatis.plugin.JSONBinaryTypeHandler}'},
-            <#elseif property.columnType =='jsonb'>
-            ${property.columnName}=${r'#{'}record.${property.propertyName}${r', typeHandler=org.mybatis.plugin.JSONBinaryTypeHandler}'},
-            <#else >
-            ${property.columnName}=${r'#{'}record.${property.propertyName}${r'}'},
-            </#if>
+            <if test="${property.propertyName} != null">
+                <#if property.columnType =='json'>
+                ${r'#{'}${property.propertyName}${r', typeHandler=org.mybatis.plugin.JSONTypeHandler}'},
+                <#elseif property.columnType =='jsonb'>
+                ${r'#{'}${property.propertyName}${r', typeHandler=org.mybatis.plugin.JSONBinaryTypeHandler}'},
+                <#elseif property.propertyType?contains('[]')>
+                ${r'#{'}${property.propertyName}${r', typeHandler=org.mybatis.plugin.ArrayTypeHandler}'},
+                <#else >
+                ${r'#{'}${property.propertyName}${r'}'},
+                </#if>
+            </if>
         </#list>
         </trim>
     </insert>
@@ -108,7 +112,7 @@
                 <#if property.columnType =='json'>
                 ${property.columnName}=${r'#{'}record.${property.propertyName}${r', typeHandler=org.mybatis.plugin.JSONBinaryTypeHandler}'},
                 <#elseif property.columnType =='jsonb'>
-                ${property.columnName}=${r'#{'} record.${property.propertyName}${r', typeHandler=org.mybatis.plugin.JSONBinaryTypeHandler}'},
+                ${property.columnName}=${r'#{'}record.${property.propertyName}${r', typeHandler=org.mybatis.plugin.JSONBinaryTypeHandler}'},
                 <#else >
                 ${property.columnName}=${r'#{'}record.${property.propertyName}${r'}'},
                 </#if>
