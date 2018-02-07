@@ -2,8 +2,6 @@ package org.hddframework.generator.mybatis.model;
 
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +19,11 @@ public class ClassModel implements DataModel {
     private List<PropertyModel> propertyList;
 
     public List<String> getDataTypeList() {
-        return new ArrayList<>(propertyList.stream().map(PropertyModel::getPropertyType).collect(Collectors.toSet()));
+        return new ArrayList<>(propertyList.stream().map(item -> item.getPropertyType().replaceAll("\\[\\]", "")).collect(Collectors.toSet()));
+    }
+
+    public List<String> getSqlTypeList() {
+        return new ArrayList<>(propertyList.stream().map(PropertyModel::getColumnType).collect(Collectors.toSet()));
     }
 
     @Override

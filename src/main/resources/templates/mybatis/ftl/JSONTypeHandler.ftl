@@ -9,6 +9,7 @@ import java.sql.*;
 
 
 public class JSONTypeHandler extends BaseTypeHandler<JSONObject> {
+
     @Override
     public void setNonNullParameter(PreparedStatement preparedStatement, int i, JSONObject json, JdbcType jdbcType) throws SQLException {
         PGobject jsonObject = new PGobject();

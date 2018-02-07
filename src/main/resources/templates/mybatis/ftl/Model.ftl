@@ -4,6 +4,9 @@ package ${packageName}.model;
 <#if dataType == "JSONObject">
 import com.alibaba.fastjson.JSONObject;
 </#if>
+<#if dataType == "JSONObject[]">
+import com.alibaba.fastjson.JSONObject;
+</#if>
 </#list>
 import lombok.Data;
 
@@ -21,6 +24,21 @@ import java.sql.Date;
 import java.sql.Time;
 </#if>
 <#if dataType == "Timestamp">
+import java.sql.Timestamp;
+</#if>
+<#if dataType == "BigDecimal[]">
+import java.math.BigDecimal;
+</#if>
+<#if dataType == "BigInteger[]">
+import java.math.BigInteger;
+</#if>
+<#if dataType == "Date[]">
+import java.sql.Date;
+</#if>
+<#if dataType == "Time[]">
+import java.sql.Time;
+</#if>
+<#if dataType == "Timestamp[]">
 import java.sql.Timestamp;
 </#if>
 </#list>

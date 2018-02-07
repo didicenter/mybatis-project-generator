@@ -40,6 +40,16 @@ public class DatabaseType {
         return this.type;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (DatabaseType.class.isInstance(obj)) {
+            return ((DatabaseType) obj).getType().equals(this.type);
+        }
+        return false;
+    }
 
-
+    @Override
+    public int hashCode() {
+        return this.type.hashCode();
+    }
 }

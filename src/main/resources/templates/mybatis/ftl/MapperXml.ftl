@@ -4,13 +4,16 @@
     <resultMap id="${className}" type="${packageName}.model.${className}">
     <#list propertyList as property>
         <#if property.columnType =='json'>
-            <result column="${property.columnName}" property="${property.propertyName}"
-                    typeHandler="org.mybatis.plugin.JSONTypeHandler"/>
+        <result column="${property.columnName}" property="${property.propertyName}"
+                typeHandler="org.mybatis.plugin.JSONTypeHandler"/>
         <#elseif property.columnType =='jsonb'>
-            <result column="${property.columnName}" property="${property.propertyName}"
-                    typeHandler="org.mybatis.plugin.JSONBinaryTypeHandler"/>
+        <result column="${property.columnName}" property="${property.propertyName}"
+                typeHandler="org.mybatis.plugin.JSONBinaryTypeHandler"/>
+        <#elseif property.propertyType?contains('[]')>
+        <result column="${property.columnName}" property="${property.propertyName}"
+                typeHandler="org.mybatis.plugin.ArrayTypeHandler"/>
         <#else >
-            <result column="${property.columnName}" property="${property.propertyName}"/>
+        <result column="${property.columnName}" property="${property.propertyName}"/>
         </#if>
     </#list>
     </resultMap>

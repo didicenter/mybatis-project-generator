@@ -3,8 +3,10 @@ package org.hddframework.generator.mybatis;
 import com.google.common.base.CaseFormat;
 import org.hddframework.generator.mybatis.configuration.MBGConfiguration;
 import org.hddframework.generator.mybatis.database.JDBCTypeMapping;
+import org.hddframework.generator.mybatis.database.JDBCTypeMappingFactory;
 import org.hddframework.generator.mybatis.interal.*;
 import org.hddframework.generator.mybatis.model.*;
+import org.hddframework.generator.mybatis.util.ConnectionURLUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,6 +56,9 @@ public class MybatisGenerator {
             List<DataModel> dataModelList = new ArrayList<>();
             Class.forName(this.driverClassName);
             Connection connection = DriverManager.getConnection(this.url, this.userName, this.password);
+
+            JDBCTypeMapping jdbcTypeMapping = JDBCTypeMappingFactory.getJDBCTypeMapping(ConnectionURLUtils.getDatabaseTypeFromUrl(this.url));
+
             String currentSchema = connection.getSchema();
             String currentCatalog = connection.getCatalog();
             DatabaseMetaData databaseMetaData = connection.getMetaData();
@@ -81,7 +86,7 @@ public class MybatisGenerator {
                     propertyDataModel.setColumnName(columnName);
                     String propertyName = mapUnderscoreToCamelCase ? CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, columnName) : columnName;
                     propertyDataModel.setPropertyName(propertyName);
-                    propertyDataModel.setPropertyType(JDBCTypeMapping.getJavaType(sqlTypeName));
+                    propertyDataModel.setPropertyType(jdbcTypeMapping.getJavaType(sqlTypeName));
 
                     propertyList.add(propertyDataModel);
                 }
@@ -163,7 +168,7 @@ public class MybatisGenerator {
         for (DataModel dataModel : dataModelList) {
             if (dataModel instanceof ClassModel) {
                 ClassModel classModel = (ClassModel) dataModel;
-                dataTypeList.addAll(classModel.getDataTypeList());
+                dataTypeList.addAll(classModel.getSqlTypeList());
             }
         }
 
@@ -177,6 +182,11 @@ public class MybatisGenerator {
             logger.info("start to generate jsonb handler...");
             Generator jsonBinaryTypeHandlerGenerator = new JSONBinaryTypeHandlerGenerator(mbgConfiguration);
             jsonBinaryTypeHandlerGenerator.generate(pluginModel);
+        }
+        if (dataTypeList.stream().anyMatch(item -> item.contains("_") || item.contains("[]"))) {
+            logger.info("start to generate array handler...");
+            Generator arrayTypeHandlerGenerator = new ArrayTypeHandlerGenerator(mbgConfiguration);
+            arrayTypeHandlerGenerator.generate(pluginModel);
         }
 
         if (mbgConfiguration.getGeneratorConfiguration().isGenerateMybatisCriterion()) {
