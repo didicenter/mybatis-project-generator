@@ -219,15 +219,28 @@ public class ProjectGeneratorJFrame extends JFrame {
                 DatabaseConfiguration databaseConfiguration = new DatabaseConfiguration();
                 // "MYSQL", "PostgreSQL", "SQLSERVER", "DB2", "ORACL", "SYBASE"
                 String driveClass = "";
+                String url = jTextField2.getText();
                 if ("MYSQL".equalsIgnoreCase(jComboBox1.getSelectedItem().toString())) {
                     driveClass = "com.mysql.cj.jdbc.Driver";
+                    if (StringUtils.isNoneBlank(url)) {
+                        if (!url.contains("?")) {
+                            url = url + "?";
+                        } else {
+                            url = url + "&";
+                        }
+                        if (!url.contains("zeroDateTimeBehavior")) {
+                            url = url + "zeroDateTimeBehavior=CONVERT_TO_NULL";
+                        }
+                        url = url.replaceAll("&&", "&").replaceAll("\\?", "?");
+                    }
+                    // zeroDateTimeBehavior=CONVERT_TO_NULL
                 }
                 if ("PostgreSQL".equalsIgnoreCase(jComboBox1.getSelectedItem().toString())) {
                     driveClass = "org.postgresql.Driver";
                 }
                 System.out.println("driveClass: " + driveClass);
                 databaseConfiguration.setDriverClassName(driveClass);
-                databaseConfiguration.setUrl(jTextField2.getText());
+                databaseConfiguration.setUrl(url);
                 databaseConfiguration.setUserName(jTextField3.getText());
                 databaseConfiguration.setPassword(StringUtils.isBlank(jTextField4.getText()) ? "" : jTextField4.getText());
                 databaseConfiguration.setTableNamePattern(StringUtils.isBlank(jTextField5.getText()) ? "" : jTextField5.getText());
