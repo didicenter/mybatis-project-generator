@@ -1,22 +1,21 @@
-package org.hddframework.generator.mybatis.interal;
+package org.hddframework.generator.mybatis.interal.gson;
 
 import freemarker.template.Template;
 import org.apache.commons.io.FileUtils;
 import org.hddframework.generator.mybatis.configuration.MBGConfiguration;
+import org.hddframework.generator.mybatis.interal.GeneratorTemplate;
 
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by SongWei on 09/01/2018.
- */
-public class ResultDataGenerator extends GeneratorTemplate {
 
-    private final String templateName = "ResultData.ftl";
-    private final String fileNameSuffix = "ResultData.java";
-    private final String modelPathName = "";
+public class JsonSerializer4UtilDateGenerator extends GeneratorTemplate {
 
-    public ResultDataGenerator(MBGConfiguration mbgConfiguration) {
+    private final String templateName = "JsonSerializer4UtilDate.ftl";
+    private final String fileNameSuffix = "JsonSerializer4UtilDate.java";
+    private final String modelPathName = "configuration/gson";
+
+    public JsonSerializer4UtilDateGenerator(MBGConfiguration mbgConfiguration) {
         super(mbgConfiguration);
     }
 

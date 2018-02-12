@@ -1,6 +1,6 @@
 package ${packageName}.configuration;
 
-import ${packageName}.ResultData;
+import ${packageName}.configuration.mvc.ResultData;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

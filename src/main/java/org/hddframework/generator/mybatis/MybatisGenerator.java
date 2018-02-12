@@ -5,6 +5,9 @@ import org.hddframework.generator.mybatis.configuration.MBGConfiguration;
 import org.hddframework.generator.mybatis.database.JDBCTypeMapping;
 import org.hddframework.generator.mybatis.database.JDBCTypeMappingFactory;
 import org.hddframework.generator.mybatis.interal.*;
+import org.hddframework.generator.mybatis.interal.fastjson.*;
+import org.hddframework.generator.mybatis.interal.gson.*;
+import org.hddframework.generator.mybatis.interal.mvc.*;
 import org.hddframework.generator.mybatis.model.*;
 import org.hddframework.generator.mybatis.util.ConnectionURLUtils;
 import org.slf4j.Logger;
@@ -235,11 +238,92 @@ public class MybatisGenerator {
             Generator webMvcConfigurationGenerator = new WebMvcConfigurationGenerator(mbgConfiguration);
             webMvcConfigurationGenerator.generate(classModel);
         }
-        if (mbgConfiguration.getGeneratorConfiguration().isGenerateResultData()) {
-            logger.info("start to generate a common result data...");
-            Generator resultDataGenerator = new ResultDataGenerator(mbgConfiguration);
-            resultDataGenerator.generate(classModel);
-        }
+
+
+//        if (mbgConfiguration.getGeneratorConfiguration().isGenerateWebMvcConfiguration()) {
+        logger.info("start to generate spring webmvc configuration...");
+        Generator redisCachingConfigurationGenerator = new RedisCachingConfigurationGenerator(mbgConfiguration);
+        redisCachingConfigurationGenerator.generate(classModel);
+
+        Generator systemConstantGenerator = new SystemConstantGenerator(mbgConfiguration);
+        systemConstantGenerator.generate(classModel);
+
+        Generator threadPoolConfigurationGenerator = new ThreadPoolConfigurationGenerator(mbgConfiguration);
+        threadPoolConfigurationGenerator.generate(classModel);
+
+        ///////////mvc start ////////////
+        Generator jsonReturnValueHandlerGenerator = new JsonReturnValueHandlerGenerator(mbgConfiguration);
+        jsonReturnValueHandlerGenerator.generate(classModel);
+
+        Generator xmlReturnValueHandlerGenerator = new XmlReturnValueHandlerGenerator(mbgConfiguration);
+        xmlReturnValueHandlerGenerator.generate(classModel);
+
+        Generator plainValueGenerator = new PlainValueGenerator(mbgConfiguration);
+        plainValueGenerator.generate(classModel);
+
+        Generator resultDataGenerator = new ResultDataGenerator(mbgConfiguration);
+        resultDataGenerator.generate(classModel);
+
+        Generator wrapResultGenerator = new WrapResultGenerator(mbgConfiguration);
+        wrapResultGenerator.generate(classModel);
+
+        Generator xStreamUtilsGenerator = new XStreamUtilsGenerator(mbgConfiguration);
+        xStreamUtilsGenerator.generate(classModel);
+        ///////////mvc end ////////////
+
+        ///////////fastjson start ////////////
+        Generator fastJsonUtilsGenerator = new FastJsonUtilsGenerator(mbgConfiguration);
+        fastJsonUtilsGenerator.generate(classModel);
+
+        Generator bigDecimalObjectSerializerGenerator = new BigDecimalObjectSerializerGenerator(mbgConfiguration);
+        bigDecimalObjectSerializerGenerator.generate(classModel);
+
+        Generator dateObjectSerializerGenerator = new DateObjectSerializerGenerator(mbgConfiguration);
+        dateObjectSerializerGenerator.generate(classModel);
+
+        Generator doubleObjectSerializerGenerator = new DoubleObjectSerializerGenerator(mbgConfiguration);
+        doubleObjectSerializerGenerator.generate(classModel);
+
+        Generator floatObjectSerializerGenerator = new FloatObjectSerializerGenerator(mbgConfiguration);
+        floatObjectSerializerGenerator.generate(classModel);
+
+        Generator sqlDateObjectSerializerGenerator = new SqlDateObjectSerializerGenerator(mbgConfiguration);
+        sqlDateObjectSerializerGenerator.generate(classModel);
+
+        Generator timestampObjectSerializerGenerator = new TimestampObjectSerializerGenerator(mbgConfiguration);
+        timestampObjectSerializerGenerator.generate(classModel);
+
+        Generator utilDateObjectSerializerGenerator = new UtilDateObjectSerializerGenerator(mbgConfiguration);
+        utilDateObjectSerializerGenerator.generate(classModel);
+        ///////////fastjson end ////////////
+
+        ///////////gson start ////////////
+        Generator gsonJsonUtilsGenerator = new GsonJsonUtilsGenerator(mbgConfiguration);
+        gsonJsonUtilsGenerator.generate(classModel);
+
+        Generator jsonSerializer4BigDecimalGenerator = new JsonSerializer4BigDecimalGenerator(mbgConfiguration);
+        jsonSerializer4BigDecimalGenerator.generate(classModel);
+
+        Generator jsonSerializer4DateGenerator = new JsonSerializer4DateGenerator(mbgConfiguration);
+        jsonSerializer4DateGenerator.generate(classModel);
+
+        Generator jsonSerializer4DoubleGenerator = new JsonSerializer4DoubleGenerator(mbgConfiguration);
+        jsonSerializer4DoubleGenerator.generate(classModel);
+
+        Generator jsonSerializer4FloatGenerator = new JsonSerializer4FloatGenerator(mbgConfiguration);
+        jsonSerializer4FloatGenerator.generate(classModel);
+
+        Generator jsonSerializer4SqlDateGenerator = new JsonSerializer4SqlDateGenerator(mbgConfiguration);
+        jsonSerializer4SqlDateGenerator.generate(classModel);
+
+        Generator jsonSerializer4TimestampGenerator = new JsonSerializer4TimestampGenerator(mbgConfiguration);
+        jsonSerializer4TimestampGenerator.generate(classModel);
+
+        Generator jsonSerializer4UtilDateGenerator = new JsonSerializer4UtilDateGenerator(mbgConfiguration);
+        jsonSerializer4UtilDateGenerator.generate(classModel);
+        ///////////fastjson end ////////////
+//        }
+
         logger.info("generate your project success...");
 
     }

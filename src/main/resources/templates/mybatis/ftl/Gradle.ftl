@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.2.RELEASE'
+        springBootVersion = '1.5.10.RELEASE'
     }
     repositories {
         mavenLocal()
@@ -67,6 +67,14 @@ dependencies {
     compile 'com.alibaba:fastjson:1.2.44'
 
     compile 'com.google.guava:guava:21.0'
+
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.2'
+
+    compile group: 'org.springframework.data', name: 'spring-data-redis', version: '1.8.10.RELEASE'
+
+    compile group: 'redis.clients', name: 'jedis', version: '2.9.0'
+
+    compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.10'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 

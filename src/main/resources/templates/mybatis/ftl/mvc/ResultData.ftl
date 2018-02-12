@@ -1,4 +1,4 @@
-package ${packageName};
+package ${packageName}.configuration.mvc;
 
 import lombok.Data;
 
