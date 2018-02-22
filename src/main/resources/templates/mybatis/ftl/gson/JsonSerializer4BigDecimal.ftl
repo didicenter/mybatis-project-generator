@@ -10,9 +10,7 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-/**
- * Created by SongWei on 19/06/2017.
- */
+
 public class JsonSerializer4BigDecimal implements JsonSerializer<BigDecimal> {
     @Override
     public JsonElement serialize(BigDecimal src, Type typeOfSrc, JsonSerializationContext context) {

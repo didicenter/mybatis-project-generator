@@ -76,6 +76,8 @@ dependencies {
 
     compile group: 'com.thoughtworks.xstream', name: 'xstream', version: '1.4.10'
 
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc'

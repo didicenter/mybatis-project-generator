@@ -10,9 +10,7 @@ import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-/**
- * Created by SongWei on 19/06/2017.
- */
+
 public class JsonSerializer4Double implements JsonSerializer<Double> {
     @Override
     public JsonElement serialize(Double src, Type typeOfSrc, JsonSerializationContext context) {

@@ -8,14 +8,16 @@ import org.hddframework.generator.mybatis.interal.GeneratorTemplate;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Created by SongWei on 22/02/2018.
+ */
+public class WebMvcHandlerInterceptorGenerator extends GeneratorTemplate {
 
-public class WrapResultGenerator extends GeneratorTemplate {
-
-    private final String templateName = "WrapResult.ftl";
-    private final String fileNameSuffix = "WrapResult.java";
+    private final String templateName = "WebMvcHandlerInterceptor.ftl";
+    private final String fileNameSuffix = "WebMvcHandlerInterceptor.java";
     private final String modelPathName = "configuration/mvc";
 
-    public WrapResultGenerator(MBGConfiguration mbgConfiguration) {
+    public WebMvcHandlerInterceptorGenerator(MBGConfiguration mbgConfiguration) {
         super(mbgConfiguration);
     }
 

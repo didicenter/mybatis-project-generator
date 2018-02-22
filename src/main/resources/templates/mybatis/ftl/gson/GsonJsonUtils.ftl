@@ -6,9 +6,7 @@ import com.google.gson.GsonBuilder;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-/**
- * Created by SongWei on 09/02/2018.
- */
+
 public class GsonJsonUtils {
 
     public static Gson defaultGson() {

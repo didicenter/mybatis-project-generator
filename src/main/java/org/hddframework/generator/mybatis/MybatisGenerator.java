@@ -252,11 +252,11 @@ public class MybatisGenerator {
         threadPoolConfigurationGenerator.generate(classModel);
 
         ///////////mvc start ////////////
-        Generator jsonReturnValueHandlerGenerator = new JsonReturnValueHandlerGenerator(mbgConfiguration);
-        jsonReturnValueHandlerGenerator.generate(classModel);
+        Generator wrappedReturnValueHandlerGenerator = new WrappedReturnValueHandlerGenerator(mbgConfiguration);
+        wrappedReturnValueHandlerGenerator.generate(classModel);
 
-        Generator xmlReturnValueHandlerGenerator = new XmlReturnValueHandlerGenerator(mbgConfiguration);
-        xmlReturnValueHandlerGenerator.generate(classModel);
+        Generator webMvcHandlerInterceptorGenerator = new WebMvcHandlerInterceptorGenerator(mbgConfiguration);
+        webMvcHandlerInterceptorGenerator.generate(classModel);
 
         Generator plainValueGenerator = new PlainValueGenerator(mbgConfiguration);
         plainValueGenerator.generate(classModel);
@@ -264,7 +264,7 @@ public class MybatisGenerator {
         Generator resultDataGenerator = new ResultDataGenerator(mbgConfiguration);
         resultDataGenerator.generate(classModel);
 
-        Generator wrapResultGenerator = new WrapResultGenerator(mbgConfiguration);
+        Generator wrapResultGenerator = new WrappedGenerator(mbgConfiguration);
         wrapResultGenerator.generate(classModel);
 
         Generator xStreamUtilsGenerator = new XStreamUtilsGenerator(mbgConfiguration);

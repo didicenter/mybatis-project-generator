@@ -11,9 +11,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Objects;
 
-/**
- * Created by SongWei on 19/06/2017.
- */
+
 public class JsonSerializer4Timestamp implements JsonSerializer<Timestamp> {
     @Override
     public JsonElement serialize(Timestamp src, Type typeOfSrc, JsonSerializationContext context) {

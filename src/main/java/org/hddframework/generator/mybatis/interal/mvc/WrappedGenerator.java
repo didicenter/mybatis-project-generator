@@ -8,16 +8,14 @@ import org.hddframework.generator.mybatis.interal.GeneratorTemplate;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by SongWei on 30/01/2018.
- */
-public class XmlReturnValueHandlerGenerator extends GeneratorTemplate {
 
-    private final String templateName = "XmlReturnValueHandler.ftl";
-    private final String fileNameSuffix = "XmlReturnValueHandler.java";
+public class WrappedGenerator extends GeneratorTemplate {
+
+    private final String templateName = "Wrapped.ftl";
+    private final String fileNameSuffix = "Wrapped.java";
     private final String modelPathName = "configuration/mvc";
 
-    public XmlReturnValueHandlerGenerator(MBGConfiguration mbgConfiguration) {
+    public WrappedGenerator(MBGConfiguration mbgConfiguration) {
         super(mbgConfiguration);
     }
 

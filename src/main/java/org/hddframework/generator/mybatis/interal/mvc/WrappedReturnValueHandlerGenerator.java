@@ -11,13 +11,13 @@ import java.io.IOException;
 /**
  * Created by SongWei on 12/02/2018.
  */
-public class JsonReturnValueHandlerGenerator extends GeneratorTemplate {
+public class WrappedReturnValueHandlerGenerator extends GeneratorTemplate {
 
-    private final String templateName = "JsonReturnValueHandler.ftl";
-    private final String fileNameSuffix = "JsonReturnValueHandler.java";
+    private final String templateName = "WrappedReturnValueHandler.ftl";
+    private final String fileNameSuffix = "WrappedReturnValueHandler.java";
     private final String modelPathName = "configuration/mvc";
 
-    public JsonReturnValueHandlerGenerator(MBGConfiguration mbgConfiguration) {
+    public WrappedReturnValueHandlerGenerator(MBGConfiguration mbgConfiguration) {
         super(mbgConfiguration);
     }
 

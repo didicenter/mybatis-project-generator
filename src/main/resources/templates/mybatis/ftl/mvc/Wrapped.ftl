@@ -8,12 +8,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface WrapResult {
+public @interface Wrapped {
 
-    Type value() default Type.json;
-
-    enum Type {
-        json, xml
-    }
 
 }
