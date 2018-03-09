@@ -19,7 +19,12 @@ public class ClassModel implements DataModel {
     private List<PropertyModel> propertyList;
 
     public List<String> getDataTypeList() {
-        return new ArrayList<>(propertyList.stream().map(item -> item.getPropertyType().replaceAll("\\[\\]", "")).collect(Collectors.toSet()));
+        List<String> resultList = new ArrayList<>(propertyList.stream().map(item -> item.getPropertyType().replaceAll("\\[\\]", "")).collect(Collectors.toSet()));
+        boolean containsArray = propertyList.stream().anyMatch(item -> item.getPropertyType().contains("[]"));
+        if (containsArray) {
+            resultList.add("[]");
+        }
+        return resultList;
     }
 
     public List<String> getSqlTypeList() {

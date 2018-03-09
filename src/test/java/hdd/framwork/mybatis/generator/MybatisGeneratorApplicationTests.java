@@ -1,17 +1,17 @@
 package hdd.framwork.mybatis.generator;
 
 import com.google.common.base.CaseFormat;
-import hdd.framwork.mybatis.generator.core.mybatis.ConnectionURLUtils;
-import hdd.framwork.mybatis.generator.core.mybatis.model.ClassModel;
-import hdd.framwork.mybatis.generator.core.mybatis.model.PropertyModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
@@ -21,10 +21,15 @@ public class MybatisGeneratorApplicationTests {
 //	public void contextLoads() {
 //	}
 
-    private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
-    private static final String url = "jdbc:mysql://rm-2ze40fc78k7alk449o.mysql.rds.aliyuncs.com:3306/lsj_test?useUnicode=true&characterEncoding=utf8";
-    private static final String userName = "xhclsj";
-    private static final String password = "LSJ@xhc!";
+//    private static final String driverClassName = "com.mysql.cj.jdbc.Driver";
+//    private static final String url = "jdbc:mysql://rm-2ze40fc78k7alk449o.mysql.rds.aliyuncs.com:3306/lsj_test?useUnicode=true&characterEncoding=utf8";
+//    private static final String userName = "xhclsj";
+//    private static final String password = "LSJ@xhc!";
+
+    private static final String driverClassName = "org.postgresql.Driver";
+    private static final String url = "jdbc:postgresql://rm-2zey95rn7ib6heqmp.pg.rds.aliyuncs.com:3433/dev_shop";
+    private static final String userName = "xhc_test";
+    private static final String password = "Xhc_test";
 
     @Test
     public void test1() throws Exception {
@@ -72,6 +77,23 @@ public class MybatisGeneratorApplicationTests {
 //			columnSet.close();
 
         }
+
+        Statement statement = connection.createStatement();
+
+        ResultSet rs11 = statement.executeQuery("SELECT * from activity where a_id = 366");
+        while(rs11.next()){
+//            Array array = rs11.getArray("a_price");
+            Array array = rs11.getArray("a_free_gid");
+            Object data = array.getArray();
+            if(Objects.nonNull(data)){
+
+            }
+            BigDecimal[] a = (BigDecimal[])data;
+
+            System.out.println(Arrays.toString(a));
+        }
+
+
 
         tableResultSet.close();
 

@@ -134,6 +134,8 @@ public class MybatisGenerator {
         Generator serviceGenerator = new ServiceGenerator(mbgConfiguration);
         Generator serviceImplGenerator = new ServiceImplGenerator(mbgConfiguration);
 
+        Generator rowMapperGenerator = new RowMapperGenerator(mbgConfiguration);
+
         List<DataModel> dataModelList = getDataModelList();
 
         for (DataModel dataModel : dataModelList) {
@@ -165,6 +167,8 @@ public class MybatisGenerator {
                 logger.info("start to generate " + dataModel.getModelName() + " modelExample...");
                 modelExampleGenerator.generate(dataModel);
             }
+
+            rowMapperGenerator.generate(dataModel);
         }
 
         List<String> dataTypeList = new ArrayList<>();
@@ -321,6 +325,7 @@ public class MybatisGenerator {
 
         Generator jsonSerializer4UtilDateGenerator = new JsonSerializer4UtilDateGenerator(mbgConfiguration);
         jsonSerializer4UtilDateGenerator.generate(classModel);
+
         ///////////fastjson end ////////////
 //        }
 
