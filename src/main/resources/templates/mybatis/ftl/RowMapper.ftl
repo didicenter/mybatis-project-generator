@@ -44,9 +44,11 @@ public class ${className}RowMapper implements RowMapper<${className}> {
         ${className?uncap_first}.set${property.propertyName?cap_first}(JSONObject.parseObject(rs.getString("${property.columnName}")));
         <#elseif property.propertyType?contains('[]')>
         Array array${property.propertyName?cap_first} = rs.getArray("${property.columnName}");
-        Object data${property.propertyName?cap_first} = array${property.propertyName?cap_first}.getArray();
-        if(Objects.nonNull(data${property.propertyName?cap_first})){
-            ${className?uncap_first}.set${property.propertyName?cap_first}((${property.propertyType?cap_first})data${property.propertyName?cap_first});
+        if(Objects.nonNull(array${property.propertyName?cap_first})){
+            Object data${property.propertyName?cap_first} = array${property.propertyName?cap_first}.getArray();
+            if(Objects.nonNull(data${property.propertyName?cap_first})){
+                ${className?uncap_first}.set${property.propertyName?cap_first}((${property.propertyType?cap_first})data${property.propertyName?cap_first});
+            }
         }
         <#else>
         ${className?uncap_first}.set${property.propertyName?cap_first}(rs.get${property.propertyType?cap_first}("${property.columnName}"));

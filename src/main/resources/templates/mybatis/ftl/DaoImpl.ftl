@@ -5,12 +5,13 @@ import ${packageName}.dao.mapper.${className}RowMapper;
 import ${packageName}.model.${className};
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
+@Component
 public class ${className}DaoImpl implements ${className}Dao {
 
     @Autowired

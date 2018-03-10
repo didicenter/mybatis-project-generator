@@ -184,32 +184,32 @@ public class ProjectGeneratorJFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 jButton1.setEnabled(false);
-                System.out.println("1" + jTextField1.getText()); // 包名
-                System.out.println("2" + jTextField2.getText()); //URL
-                System.out.println("3" + jTextField3.getText()); //数据库用户
-                System.out.println("4" + jTextField4.getText()); // 数据库密码
-                System.out.println("5" + jTextField5.getText()); //表规则
-                System.out.println("6" + jTextField6.getText()); // 项目目录
+                // System.out.println("1" + jTextField1.getText()); // 包名
+                // System.out.println("2" + jTextField2.getText()); //URL
+                // System.out.println("3" + jTextField3.getText()); //数据库用户
+                // System.out.println("4" + jTextField4.getText()); // 数据库密码
+                // System.out.println("5" + jTextField5.getText()); //表规则
+                // System.out.println("6" + jTextField6.getText()); // 项目目录
 
-                System.out.println(jRadioButton1.isSelected());
-                System.out.println(jRadioButton2.isSelected());
-                System.out.println(jCheckBox13.isSelected());
-                System.out.println(jComboBox1.getSelectedItem());
-                System.out.println(jCheckBox1.isSelected()); // controller
-                System.out.println(jCheckBox2.isSelected()); // service
-                System.out.println(jCheckBox3.isSelected());  // serviceImpl
-                System.out.println(jCheckBox4.isSelected()); //datasource
-                System.out.println(jCheckBox5.isSelected());  // mapper
-                System.out.println(jCheckBox6.isSelected()); // mapperxml
-                System.out.println(jCheckBox7.isSelected()); // model
-                System.out.println(jCheckBox8.isSelected()); //modelExample
-                System.out.println(jCheckBox9.isSelected()); // plugin criterion
-                System.out.println(jCheckBox10.isSelected()); // Properties
-                System.out.println(jCheckBox11.isSelected()); // startupfile
-                System.out.println(jCheckBox12.isSelected()); // buildfile
-                System.out.println(jCheckBox14.isSelected()); // webMvcConfig
-                System.out.println(jCheckBox15.isSelected()); // exceptionHandlerConfig
-                System.out.println(jCheckBox16.isSelected()); // commonResultData
+                // System.out.println(jRadioButton1.isSelected());
+                // System.out.println(jRadioButton2.isSelected());
+                // System.out.println(jCheckBox13.isSelected());
+                // System.out.println(jComboBox1.getSelectedItem());
+                // System.out.println(jCheckBox1.isSelected()); // controller
+                // System.out.println(jCheckBox2.isSelected()); // service
+                // System.out.println(jCheckBox3.isSelected());  // serviceImpl
+                // System.out.println(jCheckBox4.isSelected()); //datasource
+                // System.out.println(jCheckBox5.isSelected());  // mapper
+                // System.out.println(jCheckBox6.isSelected()); // mapperxml
+                // System.out.println(jCheckBox7.isSelected()); // model
+                // System.out.println(jCheckBox8.isSelected()); //modelExample
+                // System.out.println(jCheckBox9.isSelected()); // plugin criterion
+                // System.out.println(jCheckBox10.isSelected()); // Properties
+                // System.out.println(jCheckBox11.isSelected()); // startupfile
+                // System.out.println(jCheckBox12.isSelected()); // buildfile
+                // System.out.println(jCheckBox14.isSelected()); // webMvcConfig
+                // System.out.println(jCheckBox15.isSelected()); // exceptionHandlerConfig
+                // System.out.println(jCheckBox16.isSelected()); // commonResultData
 
                 ButtonModel buttonModel = buttonGroup1.getSelection();
                 buttonModel.getSelectedObjects();
