@@ -12,5 +12,6 @@ public class PropertyModel {
     private String propertyType;
     private String columnName;
     private String columnType;
+    private boolean primaryKey = false;
 
 }

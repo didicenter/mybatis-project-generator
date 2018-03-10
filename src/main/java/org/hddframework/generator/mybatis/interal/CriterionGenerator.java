@@ -13,7 +13,6 @@ public class CriterionGenerator extends PluginGenerator {
 
     private final String templateName = "Criterion.ftl";
     private final String fileNameSuffix = "Criterion.java";
-    private final String pluginDirectoryPath = new String("org" + File.separator + "mybatis" + File.separator + "plugin");
 
     public CriterionGenerator(MBGConfiguration mbgConfiguration) {
         super(mbgConfiguration);

@@ -76,6 +76,15 @@ public class MybatisGenerator {
                 dataModel.setTableName(tableName);
                 dataModel.setClassName(CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName));
                 dataModel.setPackageName(this.rootPackageName);
+
+                ResultSet primaryKeysSet = databaseMetaData.getPrimaryKeys(connection.getCatalog(), connection.getSchema(), tableName);
+                List<String> primaryKeyList = new ArrayList<>();
+                while (primaryKeysSet.next()) {
+                    String primaryKeyName = primaryKeysSet.getString("COLUMN_NAME");
+                    primaryKeyList.add(primaryKeyName);
+                }
+                primaryKeysSet.close();
+
                 ResultSet columnSet = databaseMetaData.getColumns(currentCatalog, currentSchema, tableName, "%");
                 List<PropertyModel> propertyList = new ArrayList<>();
                 while (columnSet.next()) {
@@ -90,6 +99,9 @@ public class MybatisGenerator {
                     String propertyName = mapUnderscoreToCamelCase ? CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, columnName) : columnName;
                     propertyDataModel.setPropertyName(propertyName);
                     propertyDataModel.setPropertyType(jdbcTypeMapping.getJavaType(sqlTypeName));
+                    if(primaryKeyList.contains(columnName)){
+                        propertyDataModel.setPrimaryKey(true);
+                    }
 
                     propertyList.add(propertyDataModel);
                 }
@@ -135,6 +147,8 @@ public class MybatisGenerator {
         Generator serviceImplGenerator = new ServiceImplGenerator(mbgConfiguration);
 
         Generator rowMapperGenerator = new RowMapperGenerator(mbgConfiguration);
+        Generator daoGenerator = new DaoGenerator(mbgConfiguration);
+        Generator daoImplGenerator = new DaoImplGenerator(mbgConfiguration);
 
         List<DataModel> dataModelList = getDataModelList();
 
@@ -169,6 +183,8 @@ public class MybatisGenerator {
             }
 
             rowMapperGenerator.generate(dataModel);
+            daoGenerator.generate(dataModel);
+            daoImplGenerator.generate(dataModel);
         }
 
         List<String> dataTypeList = new ArrayList<>();
@@ -325,6 +341,15 @@ public class MybatisGenerator {
 
         Generator jsonSerializer4UtilDateGenerator = new JsonSerializer4UtilDateGenerator(mbgConfiguration);
         jsonSerializer4UtilDateGenerator.generate(classModel);
+
+        Generator aliasForGenerator = new AliasForGenerator(mbgConfiguration);
+        aliasForGenerator.generate(classModel);
+        Generator tableGenerator = new TableGenerator(mbgConfiguration);
+        tableGenerator.generate(classModel);
+        Generator columnGenerator = new ColumnGenerator(mbgConfiguration);
+        columnGenerator.generate(classModel);
+        Generator idGenerator = new IDGenerator(mbgConfiguration);
+        idGenerator.generate(classModel);
 
         ///////////fastjson end ////////////
 //        }

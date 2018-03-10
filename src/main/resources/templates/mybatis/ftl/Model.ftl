@@ -9,6 +9,11 @@ import com.alibaba.fastjson.JSONObject;
 </#if>
 </#list>
 import lombok.Data;
+import org.hddframework.jdbc.annotation.Column;
+<#if containsPrimaryKey >
+import org.hddframework.jdbc.annotation.ID;
+</#if>
+import org.hddframework.jdbc.annotation.Table;
 
 <#list dataTypeList as dataType>
 <#if dataType == "BigDecimal">
@@ -44,9 +49,14 @@ import java.sql.Timestamp;
 </#list>
 
 @Data
+@Table("${tableName}")
 public class ${className} {
 
 <#list propertyList as property>
+    <#if property.primaryKey>
+    @ID("${property.columnName}")
+    </#if>
+    @Column("${property.columnName}")
     private ${property.propertyType} ${property.propertyName};
 </#list>
 

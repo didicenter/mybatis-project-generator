@@ -17,6 +17,12 @@ public class ClassModel implements DataModel {
     private String className;
     private String tableName;
     private List<PropertyModel> propertyList;
+    private boolean containsPrimaryKey = true;
+
+
+    public boolean isContainsPrimaryKey() {
+        return propertyList.stream().anyMatch(item -> item.isPrimaryKey());
+    }
 
     public List<String> getDataTypeList() {
         List<String> resultList = new ArrayList<>(propertyList.stream().map(item -> item.getPropertyType().replaceAll("\\[\\]", "")).collect(Collectors.toSet()));

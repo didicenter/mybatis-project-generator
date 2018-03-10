@@ -20,6 +20,7 @@ public class MBGConfiguration {
 
     private final Configuration ftlConfiguration;
     private static final String templatePath = "/templates/mybatis/ftl/";
+    private static final String templatePath_framework = "/templates/framework/ftl/";
     private static final String templatePath_fastjson = "/templates/mybatis/ftl/fastjson/";
     private static final String templatePath_gson = "/templates/mybatis/ftl/gson/";
     private static final String templatePath_mvc = "/templates/mybatis/ftl/mvc/";
@@ -30,7 +31,8 @@ public class MBGConfiguration {
         ClassTemplateLoader fastjson_classTemplateLoader = new ClassTemplateLoader(MybatisGenerator.class, templatePath_fastjson);
         ClassTemplateLoader gson_classTemplateLoader = new ClassTemplateLoader(MybatisGenerator.class, templatePath_gson);
         ClassTemplateLoader mvc_classTemplateLoader = new ClassTemplateLoader(MybatisGenerator.class, templatePath_mvc);
-        TemplateLoader[] templateLoaders = {root_classTemplateLoader, fastjson_classTemplateLoader, gson_classTemplateLoader, mvc_classTemplateLoader};
+        ClassTemplateLoader framework_classTemplateLoader = new ClassTemplateLoader(MybatisGenerator.class, templatePath_framework);
+        TemplateLoader[] templateLoaders = {root_classTemplateLoader, fastjson_classTemplateLoader, gson_classTemplateLoader, mvc_classTemplateLoader, framework_classTemplateLoader};
         MultiTemplateLoader multiTemplateLoader = new MultiTemplateLoader(templateLoaders);
 
         this.ftlConfiguration = new Configuration(Configuration.VERSION_2_3_23);

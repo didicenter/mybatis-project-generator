@@ -18,6 +18,9 @@ public class ProjectConfiguration {
     private final String relativeJavaDirectoryPath = "src" + File.separator + "main" + File.separator + "java";
     private final String relativeResourcesDirectoryPath = "src" + File.separator + "main" + File.separator + "resources";
 
+    private final String relativeJavaDirectoryForTestPath = "src" + File.separator + "test" + File.separator + "java";
+    private final String relativeResourcesDirectoryForTestPath = "src" + File.separator + "test" + File.separator + "resources";
+
     private String rootAbsolutePath;
     private String rootPackageName;
     private String projectName;
@@ -52,6 +55,15 @@ public class ProjectConfiguration {
     }
 
     public File getJavaDirectory() {
+        String absoluteJavaDirectoryForTestPath = (this.rootAbsolutePath + File.separator + relativeJavaDirectoryForTestPath)
+                .replaceAll(File.separator + File.separator + "1+", File.separator);
+        File javaDirectoryForTest = new File(absoluteJavaDirectoryForTestPath);
+        try {
+            FileUtils.forceMkdir(javaDirectoryForTest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         String absoluteJavaDirectoryPath = (this.rootAbsolutePath + File.separator + relativeJavaDirectoryPath)
                 .replaceAll(File.separator + File.separator + "1+", File.separator);
         File javaDirectory = new File(absoluteJavaDirectoryPath);
@@ -64,6 +76,15 @@ public class ProjectConfiguration {
     }
 
     public File getResourcesDirectory() {
+        String absoluteResourcesDirectoryForTestPath = (this.rootAbsolutePath + File.separator + relativeResourcesDirectoryForTestPath)
+                .replaceAll(File.separator + File.separator + "1+", File.separator);
+        File resourcesDirectoryForTest = new File(absoluteResourcesDirectoryForTestPath);
+        try {
+            FileUtils.forceMkdir(resourcesDirectoryForTest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         String absoluteResourcesDirectoryPath = (this.rootAbsolutePath + File.separator + relativeResourcesDirectoryPath)
                 .replaceAll(File.separator + File.separator + "1+", File.separator);
         File resourcesDirectory = new File(absoluteResourcesDirectoryPath);

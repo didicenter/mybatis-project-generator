@@ -1,6 +1,7 @@
 package hdd.framwork.mybatis.generator;
 
 import com.google.common.base.CaseFormat;
+import org.hddframework.generator.mybatis.model.PropertyModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -55,49 +56,52 @@ public class MybatisGeneratorApplicationTests {
 //		databaseMetaData.getCatalogs();
 
 
-        ResultSet tableResultSet = databaseMetaData.getTables(connection.getCatalog(), connection.getSchema(), "%%", new String[]{"TABLE"});
+        ResultSet tableResultSet = databaseMetaData.getTables(connection.getCatalog(), connection.getSchema(), "%orders_goods%", new String[]{"TABLE"});
         int i = 1;
         while (tableResultSet.next()) {
             String tableName = tableResultSet.getString("TABLE_NAME");
             System.out.println((i++) + "=" + "tableName: " + tableName);
 
-//			ResultSetMetaData tableMetaData = tableResultSet.getMetaData();
+            ResultSet primaryKeysSet = databaseMetaData.getPrimaryKeys(connection.getCatalog(), connection.getSchema(), tableName);
             ResultSet columnSet = databaseMetaData.getColumns(connection.getCatalog(), connection.getSchema(), tableName, "%");
-//
-//			int  columnSet000 = tableMetaData.getColumnCount();
-//			if(tableName.equalsIgnoreCase("user_disclosure_collections")){
-//				System.out.println("~~~~~~~~~~~");
-//			}
-            while (columnSet.next()) {
-                if (tableName.equalsIgnoreCase("user_disclosure_collections")) {
-                    String columnName = columnSet.getString("COLUMN_NAME");
-                    System.out.println("columnName: "+ columnName);
-                }
+
+            while (primaryKeysSet.next()) {
+                System.err.println("****** Comment ******");
+                System.err.println("TABLE_NAME : " + primaryKeysSet.getString("TABLE_NAME"));
+                System.err.println("COLUMN_NAME : " + primaryKeysSet.getString("COLUMN_NAME"));
+//                System.err.println("TABLE_CAT : " + primaryKeysSet.getString(1));
+//                System.err.println("TABLE_SCHEM: " + primaryKeysSet.getObject(2));
+//                System.err.println("TABLE_NAME : " + primaryKeysSet.getObject(3));
+//                System.err.println("COLUMN_NAME: " + primaryKeysSet.getObject(4));
+//                System.err.println("KEY_SEQ : " + primaryKeysSet.getObject(5));
+//                System.err.println("PK_NAME : " + primaryKeysSet.getObject(6));
+                System.err.println("****** ******* ******");
             }
-//			columnSet.close();
 
         }
 
         Statement statement = connection.createStatement();
 
         ResultSet rs11 = statement.executeQuery("SELECT * from activity where a_id = 366");
-        while(rs11.next()){
+        while (rs11.next()) {
 //            Array array = rs11.getArray("a_price");
             Array array = rs11.getArray("a_free_gid");
             Object data = array.getArray();
-            if(Objects.nonNull(data)){
+            if (Objects.nonNull(data)) {
 
             }
-            BigDecimal[] a = (BigDecimal[])data;
+            BigDecimal[] a = (BigDecimal[]) data;
 
             System.out.println(Arrays.toString(a));
         }
 
 
-
         tableResultSet.close();
 
         connection.close();
+
+        PropertyModel propertyModel = new PropertyModel();
+        propertyModel.isPrimaryKey();
 
     }
 
